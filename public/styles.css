@@ -1,0 +1,61 @@
+.hello{
+  background-image: url("https://images.unsplash.com/photo-1517685352821-92cf88aee5a5?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8Y2xvdWRzfGVufDB8fDB8fA%3D%3D&w=1000&q=80");
+  height: 800 px;
+  width: 100 px;
+}
+
+.hello2{
+  background-image: url("https://s7d2.scene7.com/is/image/TWCNews/heavy_rain_jpg-2");
+  height: 800 px;
+  width: 100 px;
+}
+
+p{
+  color:red;
+  border-style: dotted;
+}
+
+p2{
+  color:green;
+}
+
+p3{
+  color:blue;
+}
+
+h1{
+  background-color: DodgerBlue;
+}
+
+h3{
+  background-color:orange;
+}
+
+p4{
+  color:rgb(174,0,0);
+  background-color: rgb(179,196,222);
+}
+
+.images{
+  border-radius: 50%;
+}
+
+#leftbox{
+  float:left;
+  background:rgb(255,140,0);
+  width:25%;
+  height:280px;
+}
+
+#middlebox{
+  float:left;
+  background:rgb(143,188,143);
+  width:50%;
+  height:280px;
+            }
+#rightbox{
+  float:right;
+  background:rgb(0,139,139);
+  width:25%;
+  height:280px;
+}
