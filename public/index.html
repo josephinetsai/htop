@@ -167,4 +167,43 @@ Source: Collected Poems (HarperCollins Publishers Inc, 1992)
 <h2>hello</h2>
 hello there myself hello there hello
 </div>
+
+<div id = "leftbox1">
+  <h2></h2>
+     <button class = "blue" id="bluebutton"> words </button>
+
+</div>
+
+
+<div id = "rightbox1">
+<h2></h2><button class = "red" id="redbutton"> words </button>
+
+</div>
+
+<div id = "leftbox2">
+  <h2></h2>
+     <button class = "yellow" id="yellowbutton"> words </button>
+
+</div>
+
+
+<div id = "rightbox2">
+  <button class = "green" id="greenbutton"> words </button>
+<h2></h2>
+
+</div>
+
+<script>
+var greenButton = document.getElementById("greenbutton");
+var redButton = document.getElementById("redbutton");
+var blueButton = document.getElementById("bluebutton");
+var yellowButton = document.getElementById("yellowbutton");
+greenButton.addEventListener("click", function(){greenButton.classList.add("greenOn"); greenButton.classList.remove("green");});
+redButton.addEventListener("click", function(){redButton.classList.add("redOn"); redButton.classList.remove("red");});
+blueButton.addEventListener("click", function(){blueButton.classList.add("blueOn"); greenButton.classList.remove("blue");});
+yellowButton.addEventListener("click", function(){yellowButton.classList.add("yellowOn"); greenButton.classList.remove("yellow");});
+// greenButton.classList.add("greenOn");
+// greenButton.classList.remove("green");
+
+</script>
 </html>
