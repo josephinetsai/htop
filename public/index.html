@@ -168,27 +168,36 @@ Source: Collected Poems (HarperCollins Publishers Inc, 1992)
 hello there myself hello there hello
 </div>
 
+<h5> <center>Click to Start Below</center>
+  <center><button class = "starting" id="starting123"> START </button></center>
+
+
+
+</h5>
+
+
+
 <div id = "leftbox1">
   <h2></h2>
-     <button class = "blue" id="bluebutton"> words </button>
+     <button class = "blue" id="bluebutton">  </button>
 
 </div>
 
 
 <div id = "rightbox1">
-<h2></h2><button class = "red" id="redbutton"> words </button>
+<h2></h2><button class = "red" id="redbutton">  </button>
 
 </div>
 
 <div id = "leftbox2">
   <h2></h2>
-     <button class = "yellow" id="yellowbutton"> words </button>
+     <button class = "yellow" id="yellowbutton">  </button>
 
 </div>
 
 
 <div id = "rightbox2">
-  <button class = "green" id="greenbutton"> words </button>
+  <button class = "green" id="greenbutton">  </button>
 <h2></h2>
 
 </div>
@@ -198,12 +207,144 @@ var greenButton = document.getElementById("greenbutton");
 var redButton = document.getElementById("redbutton");
 var blueButton = document.getElementById("bluebutton");
 var yellowButton = document.getElementById("yellowbutton");
-greenButton.addEventListener("click", function(){greenButton.classList.add("greenOn"); greenButton.classList.remove("green");});
-redButton.addEventListener("click", function(){redButton.classList.add("redOn"); redButton.classList.remove("red");});
-blueButton.addEventListener("click", function(){blueButton.classList.add("blueOn"); greenButton.classList.remove("blue");});
-yellowButton.addEventListener("click", function(){yellowButton.classList.add("yellowOn"); greenButton.classList.remove("yellow");});
+var startingButton = document.getElementById("starting123")
+var correctPattern = [Math.floor(Math.random() * 4)+1];
+var on = true;
+
+// greenButton.addEventListener("click", function(){greenButton.classList.add("greenOn"); greenButton.classList.remove("green"); answer.push(4)});
+// redButton.addEventListener("click", function(){redButton.classList.add("redOn"); redButton.classList.remove("red"); answer.push(2);});
+// blueButton.addEventListener("click", function(){blueButton.classList.add("blueOn"); greenButton.classList.remove("blue");answer.push(4);});
+// yellowButton.addEventListener("click", function(){yellowButton.classList.add("yellowOn"); greenButton.classList.remove("yellow");answer.push(3);});
 // greenButton.classList.add("greenOn");
 // greenButton.classList.remove("green");
+
+
+function addTo()
+{
+  correctPattern.push(Math.floor(Math.random() * 4)+1);
+}
+
+function lightUp(number)
+{
+
+  if(number == 1)
+  {
+    blueButton.classList.add("blueOn");
+    blueButton.classList.remove("blue");
+  }
+
+  if(number == 2)
+  {
+    redButton.classList.add("redOn");
+    redButton.classList.remove("red");
+  }
+
+  if(number == 3)
+  {
+    yellowButton.classList.add("yellowOn");
+    yellowButton.classList.remove("yellow");
+  }
+
+  if(number == 4)
+  {
+    greenButton.classList.add("greenOn");
+    greenButton.classList.remove("green");
+  }
+
+}
+
+function Unlight(number)
+{
+
+  if(number == 1)
+  {
+    blueButton.classList.remove("blueOn");
+    blueButton.classList.add("blue");
+  }
+
+  if(number == 2)
+  {
+    redButton.classList.remove("redOn");
+    redButton.classList.add("red");
+  }
+
+  if(number == 3)
+  {
+    yellowButton.classList.remove("yellowOn");
+    yellowButton.classList.add("yellow");
+  }
+
+  if(number == 4)
+  {
+    greenButton.classList.remove("greenOn");
+    greenButton.classList.add("green");
+  }
+
+}
+
+
+function gameOn()
+{
+  for (let i = 0; i < correctPattern.length; i++)
+  {
+    if(correctPattern[i] == 1)
+    {
+      setTimeout(() => {lightUp(1)}, (i*1000));
+      setTimeout(() => {Unlight(1)}, ((i+0.07)*1000));
+    }
+    if(correctPattern[i] == 2)
+    {
+      setTimeout(() => {lightUp(2)}, (i*1000));
+      setTimeout(() => {Unlight(2)}, ((i+0.07)*1000));
+    }
+    if(correctPattern[i] == 3)
+    {
+      setTimeout(() => {lightUp(3)}, (i*1000));
+      setTimeout(() => {Unlight(3)}, ((i+0.07)*1000));
+    }
+    if(correctPattern[i] == 4)
+    {
+      setTimeout(() => {lightUp(4)}, (i*1000));
+      setTimeout(() => {Unlight(4)}, ((i+0.07)*1000));
+    }
+  }
+}
+startingButton.addEventListener("click", function(){playing()});
+greenButton.addEventListener("click", function(){lightUp(4); setTimeout(() => {Unlight(4)}, ((0.07)*1000)); checkThings(4);});
+redButton.addEventListener("click", function(){lightUp(2); setTimeout(() => {Unlight(2)}, ((0.07)*1000));checkThings(2);});
+blueButton.addEventListener("click", function(){lightUp(1); setTimeout(() => {Unlight(1)}, ((0.07)*1000));checkThings(1);});
+yellowButton.addEventListener("click", function(){lightUp(3); setTimeout(() => {Unlight(3)},((0.07)*1000));checkThings(3);});
+
+function playing()
+{
+    gameOn();
+    answer = [];
+
+}
+
+function checkThings(number)
+{
+
+  answer.push(number);
+
+    {
+      if(correctPattern[answer.length-1] != answer[answer.length-1])
+      {
+        console.log("wrong!");
+      }
+
+      else if(answer.length == correctPattern.length && correctPattern[answer.length-1] == answer[answer.length-1])
+      {
+        console.log("correct! here is the next pattern");
+        addTo();
+        // console.log(correctPattern);
+        setTimeout(() => {playing()},1000);
+      }
+
+    }
+
+}
+
 
 </script>
 </html>
