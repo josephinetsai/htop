@@ -309,7 +309,7 @@ function gameOn()
     }
   }
 }
-startingButton.addEventListener("click", function(){playing()});
+startingButton.addEventListener("click", function(){playing(); counter = 0;});
 greenButton.addEventListener("click", function(){lightUp(4); setTimeout(() => {Unlight(4)}, ((0.07)*1000)); checkThings(4);});
 redButton.addEventListener("click", function(){lightUp(2); setTimeout(() => {Unlight(2)}, ((0.07)*1000));checkThings(2);});
 blueButton.addEventListener("click", function(){lightUp(1); setTimeout(() => {Unlight(1)}, ((0.07)*1000));checkThings(1);});
@@ -319,6 +319,7 @@ function playing()
 {
     gameOn();
     answer = [];
+   
 
 }
 
@@ -331,21 +332,23 @@ function checkThings(number)
       if(correctPattern[answer.length-1] != answer[answer.length-1])
       {
         console.log("wrong!");
-<<<<<<< Updated upstream
-        console.log("your highest level:" + answers.length-2);
-=======
-        var thing = answer.length -1;
-        console.log("best level:" + thing);
->>>>>>> Stashed changes
-      }
+        console.log(counter);
 
-      else if(answer.length == correctPattern.length && correctPattern[answer.length-1] == answer[answer.length-1])
+        console.log("your highest level:" + counter);
+
+      }
+  
+
+      if(answer.length == correctPattern.length && correctPattern[answer.length-1] == answer[answer.length-1])
       {
         console.log("correct! here is the next pattern");
         addTo();
+        counter ++;
         // console.log(correctPattern);
         setTimeout(() => {playing()},1000);
       }
+      
+    
 
     }
 
