@@ -175,7 +175,7 @@ hello there myself hello there hello
 
 </h5>
 
-
+<input type = "button" id = "myButton1" value = "HIGHSCORE:">  </input>
 
 <div id = "leftbox1">
   <h2></h2>
@@ -192,6 +192,7 @@ hello there myself hello there hello
 <div id = "leftbox2">
   <h2></h2>
      <button class = "yellow" id="yellowbutton">  </button>
+     <script> document.getElementById("myButton1").value = "HIGH SCORE:" + window.localStorage.getItem('highscore'); </script>
 
 </div>
 
@@ -210,6 +211,9 @@ var yellowButton = document.getElementById("yellowbutton");
 var startingButton = document.getElementById("starting123")
 var correctPattern = [Math.floor(Math.random() * 4)+1];
 var on = true;
+
+// window.localStorage.setItem('highscore', ''+highest);
+// var highest;
 
 // greenButton.addEventListener("click", function(){greenButton.classList.add("greenOn"); greenButton.classList.remove("green"); answer.push(4)});
 // redButton.addEventListener("click", function(){redButton.classList.add("redOn"); redButton.classList.remove("red"); answer.push(2);});
@@ -319,7 +323,7 @@ function playing()
 {
     gameOn();
     answer = [];
-   
+
 
 }
 
@@ -331,24 +335,49 @@ function checkThings(number)
     {
       if(correctPattern[answer.length-1] != answer[answer.length-1])
       {
-        console.log("wrong!");
+        // console.log("wrong!");
+        window.alert("wrong!");
         console.log(counter);
 
-        console.log("your highest level:" + counter);
+        // console.log("your highest level:" + counter);
+        // window.alert("your highest level:" + counter);
+        // if(counter > window.localStorage.getItem('highscore')){
+        //   window.localStorage.setItem('highscore',counter);
+        // }
+        setTimeout(() => {window.location.reload()},100);
+        ;
 
       }
-  
+
 
       if(answer.length == correctPattern.length && correctPattern[answer.length-1] == answer[answer.length-1])
       {
         console.log("correct! here is the next pattern");
+//   window.alert("correct! here is the next pattern");
+
         addTo();
         counter ++;
         // console.log(correctPattern);
+        if(window.localStorage.getItem('highscore') == null)
+        {
+          window.localStorage.setItem('highscore',''+1);
+          // console.log("asdfjasdfajlshdf");
+          // highest = window.localStorage.getItem('highscore');
+          document.getElementById("myButton1").value = "HIGH SCORE:" + window.localStorage.getItem('highscore');
+        }
+        if(counter > window.localStorage.getItem('highscore')){
+          // window.localStorage.highscore = counter;
+          // console.log(window.localStorage.highscore);
+          window.localStorage.setItem('highscore',''+counter);
+          // highest = window.localStorage.getItem('highscore');
+          document.getElementById("myButton1").value = "HIGH SCORE:" + window.localStorage.getItem('highscore');
+
+        }
+        // console.log(window.localStorage.getItem('highscore'));
         setTimeout(() => {playing()},1000);
       }
-      
-    
+
+
 
     }
 
