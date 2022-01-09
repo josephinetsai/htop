@@ -204,185 +204,150 @@ hello there myself hello there hello
 </div>
 
 <script>
-var greenButton = document.getElementById("greenbutton");
-var redButton = document.getElementById("redbutton");
-var blueButton = document.getElementById("bluebutton");
-var yellowButton = document.getElementById("yellowbutton");
-var startingButton = document.getElementById("starting123")
-var correctPattern = [Math.floor(Math.random() * 4)+1];
-var on = true;
+let App = {
 
-// window.localStorage.setItem('highscore', ''+highest);
-// var highest;
+  correctPattern : [Math.floor(Math.random() * 4)+1],
 
-// greenButton.addEventListener("click", function(){greenButton.classList.add("greenOn"); greenButton.classList.remove("green"); answer.push(4)});
-// redButton.addEventListener("click", function(){redButton.classList.add("redOn"); redButton.classList.remove("red"); answer.push(2);});
-// blueButton.addEventListener("click", function(){blueButton.classList.add("blueOn"); greenButton.classList.remove("blue");answer.push(4);});
-// yellowButton.addEventListener("click", function(){yellowButton.classList.add("yellowOn"); greenButton.classList.remove("yellow");answer.push(3);});
-// greenButton.classList.add("greenOn");
-// greenButton.classList.remove("green");
+  buttons : {
+    green : document.getElementById("greenbutton"),
+    red : document.getElementById("redbutton"),
+    blue : document.getElementById("bluebutton"),
+    yellow : document.getElementById("yellowbutton"),
+    start : document.getElementById("starting123")
+  },
 
-
-function addTo()
-{
-  correctPattern.push(Math.floor(Math.random() * 4)+1);
-}
-
-function lightUp(number)
-{
-
-  if(number == 1)
-  {
-    blueButton.classList.add("blueOn");
-    blueButton.classList.remove("blue");
-  }
-
-  if(number == 2)
-  {
-    redButton.classList.add("redOn");
-    redButton.classList.remove("red");
-  }
-
-  if(number == 3)
-  {
-    yellowButton.classList.add("yellowOn");
-    yellowButton.classList.remove("yellow");
-  }
-
-  if(number == 4)
-  {
-    greenButton.classList.add("greenOn");
-    greenButton.classList.remove("green");
-  }
-
-}
-
-function Unlight(number)
-{
-
-  if(number == 1)
-  {
-    blueButton.classList.remove("blueOn");
-    blueButton.classList.add("blue");
-  }
-
-  if(number == 2)
-  {
-    redButton.classList.remove("redOn");
-    redButton.classList.add("red");
-  }
-
-  if(number == 3)
-  {
-    yellowButton.classList.remove("yellowOn");
-    yellowButton.classList.add("yellow");
-  }
-
-  if(number == 4)
-  {
-    greenButton.classList.remove("greenOn");
-    greenButton.classList.add("green");
-  }
-
-}
-
-
-function gameOn()
-{
-  for (let i = 0; i < correctPattern.length; i++)
-  {
-    if(correctPattern[i] == 1)
+  helperFunctions : {
+    addNumberToPattern : function()
     {
-      setTimeout(() => {lightUp(1)}, (i*1000));
-      setTimeout(() => {Unlight(1)}, ((i+0.07)*1000));
-    }
-    if(correctPattern[i] == 2)
+      App.correctPattern.push(Math.floor(Math.random() * 4)+1);
+    },
+
+    flashNextColorInPattern : function (number)
     {
-      setTimeout(() => {lightUp(2)}, (i*1000));
-      setTimeout(() => {Unlight(2)}, ((i+0.07)*1000));
-    }
-    if(correctPattern[i] == 3)
-    {
-      setTimeout(() => {lightUp(3)}, (i*1000));
-      setTimeout(() => {Unlight(3)}, ((i+0.07)*1000));
-    }
-    if(correctPattern[i] == 4)
-    {
-      setTimeout(() => {lightUp(4)}, (i*1000));
-      setTimeout(() => {Unlight(4)}, ((i+0.07)*1000));
-    }
-  }
-}
-startingButton.addEventListener("click", function(){playing(); counter = 0;});
-greenButton.addEventListener("click", function(){lightUp(4); setTimeout(() => {Unlight(4)}, ((0.07)*1000)); checkThings(4);});
-redButton.addEventListener("click", function(){lightUp(2); setTimeout(() => {Unlight(2)}, ((0.07)*1000));checkThings(2);});
-blueButton.addEventListener("click", function(){lightUp(1); setTimeout(() => {Unlight(1)}, ((0.07)*1000));checkThings(1);});
-yellowButton.addEventListener("click", function(){lightUp(3); setTimeout(() => {Unlight(3)},((0.07)*1000));checkThings(3);});
-
-function playing()
-{
-    gameOn();
-    answer = [];
-
-
-}
-
-function checkThings(number)
-{
-
-  answer.push(number);
-
-    {
-      if(correctPattern[answer.length-1] != answer[answer.length-1])
+      if(number == 1)
       {
-        // console.log("wrong!");
-        window.alert("wrong!");
-        console.log(counter);
-
-        // console.log("your highest level:" + counter);
-        // window.alert("your highest level:" + counter);
-        // if(counter > window.localStorage.getItem('highscore')){
-        //   window.localStorage.setItem('highscore',counter);
-        // }
-        setTimeout(() => {window.location.reload()},100);
-        ;
-
+        App.buttons.blue.classList.add("blueOn");
+        App.buttons.blue.classList.remove("blue");
       }
 
-
-      if(answer.length == correctPattern.length && correctPattern[answer.length-1] == answer[answer.length-1])
+      if(number == 2)
       {
-        console.log("correct! here is the next pattern");
-//   window.alert("correct! here is the next pattern");
+        App.buttons.red.classList.add("redOn");
+        App.buttons.red.classList.remove("red");
+      }
 
-        addTo();
-        counter ++;
-        // console.log(correctPattern);
-        if(window.localStorage.getItem('highscore') == null)
+      if(number == 3)
+      {
+        App.buttons.yellow.classList.add("yellowOn");
+        App.buttons.yellow.classList.remove("yellow");
+      }
+
+      if(number == 4)
+      {
+        App.buttons.green.classList.add("greenOn");
+        App.buttons.green.classList.remove("green");
+      }
+    },
+
+    stopFlashingColor : function (number)
+    {
+      if(number == 1)
+      {
+        App.buttons.blue.classList.remove("blueOn");
+        App.buttons.blue.classList.add("blue");
+      }
+
+      if(number == 2)
+      {
+        App.buttons.red.classList.remove("redOn");
+        App.buttons.red.classList.add("red");
+      }
+
+      if(number == 3)
+      {
+        App.buttons.yellow.classList.remove("yellowOn");
+        App.buttons.yellow.classList.add("yellow");
+      }
+
+      if(number == 4)
+      {
+        App.buttons.green.classList.remove("greenOn");
+        App.buttons.green.classList.add("green");
+      }
+    },
+
+    flashEntirePattern : function ()
+    {
+      for (let i = 0; i < App.correctPattern.length; i++)
+      {
+        if(App.correctPattern[i] == 1)
         {
-          window.localStorage.setItem('highscore',''+1);
-          // console.log("asdfjasdfajlshdf");
-          // highest = window.localStorage.getItem('highscore');
-          document.getElementById("myButton1").value = "HIGH SCORE:" + window.localStorage.getItem('highscore');
+          setTimeout(() => {App.helperFunctions.flashNextColorInPattern(1)}, (i*1000));
+          setTimeout(() => {App.helperFunctions.stopFlashingColor(1)}, ((i+0.07)*1000));
         }
-        if(counter > window.localStorage.getItem('highscore')){
-          // window.localStorage.highscore = counter;
-          // console.log(window.localStorage.highscore);
-          window.localStorage.setItem('highscore',''+counter);
-          // highest = window.localStorage.getItem('highscore');
-          document.getElementById("myButton1").value = "HIGH SCORE:" + window.localStorage.getItem('highscore');
-
+        if(App.correctPattern[i] == 2)
+        {
+          setTimeout(() => {App.helperFunctions.flashNextColorInPattern(2)}, (i*1000));
+          setTimeout(() => {App.helperFunctions.stopFlashingColor(2)}, ((i+0.07)*1000));
         }
-        // console.log(window.localStorage.getItem('highscore'));
-        setTimeout(() => {playing()},1000);
+        if(App.correctPattern[i] == 3)
+        {
+          setTimeout(() => {App.helperFunctions.flashNextColorInPattern(3)}, (i*1000));
+          setTimeout(() => {App.helperFunctions.stopFlashingColor(3)}, ((i+0.07)*1000));
+        }
+        if(App.correctPattern[i] == 4)
+        {
+          setTimeout(() => {App.helperFunctions.flashNextColorInPattern(4)}, (i*1000));
+          setTimeout(() => {App.helperFunctions.stopFlashingColor(4)}, ((i+0.07)*1000));
+        }
       }
+    },
 
+    checkForCorrectInputAndAdjustHighScoreIfNeeded : function (number)
+    {
+      answer.push(number);
 
+        {
+          if(App.correctPattern[answer.length-1] != answer[answer.length-1])
+          {
+            window.alert("wrong!");
+            console.log(counter);
+            setTimeout(() => {window.location.reload()},100);
+            ;
+          }
+          if(answer.length == App.correctPattern.length && App.correctPattern[answer.length-1] == answer[answer.length-1])
+          {
+            console.log("correct! here is the next pattern");
+            App.helperFunctions.addNumberToPattern();
+            counter ++;
+            if(window.localStorage.getItem('highscore') == null)
+            {
+              window.localStorage.setItem('highscore',''+1);
+              document.getElementById("myButton1").value = "HIGH SCORE:" + window.localStorage.getItem('highscore');
+            }
+            if(counter > window.localStorage.getItem('highscore')){
+              window.localStorage.setItem('highscore',''+counter);
+              document.getElementById("myButton1").value = "HIGH SCORE:" + window.localStorage.getItem('highscore');
 
+            }
+            setTimeout(() => {App.startRound()},1000);
+          }
+        }
     }
+  },
 
-}
+  startRound : function ()
+  {
+    App.helperFunctions.flashEntirePattern();
+    answer = [];
+  }
+};
 
+App.buttons.start.addEventListener("click", function(){App.startRound(); counter = 0;});
+App.buttons.green.addEventListener("click", function(){App.helperFunctions.flashNextColorInPattern(4); setTimeout(() => {App.helperFunctions.stopFlashingColor(4)}, ((0.07)*1000)); App.helperFunctions.checkForCorrectInputAndAdjustHighScoreIfNeeded(4);});
+App.buttons.red.addEventListener("click", function(){App.helperFunctions.flashNextColorInPattern(2); setTimeout(() => {App.helperFunctions.stopFlashingColor(2)}, ((0.07)*1000)); App.helperFunctions.checkForCorrectInputAndAdjustHighScoreIfNeeded(2);});
+App.buttons.blue.addEventListener("click", function(){App.helperFunctions.flashNextColorInPattern(1); setTimeout(() => {App.helperFunctions.stopFlashingColor(1)}, ((0.07)*1000)); App.helperFunctions.checkForCorrectInputAndAdjustHighScoreIfNeeded(1);});
+App.buttons.yellow.addEventListener("click", function(){App.helperFunctions.flashNextColorInPattern(3); setTimeout(() => {App.helperFunctions.stopFlashingColor(3)},((0.07)*1000)); App.helperFunctions.checkForCorrectInputAndAdjustHighScoreIfNeeded(3);});
 
 </script>
 </html>
